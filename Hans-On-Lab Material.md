@@ -140,19 +140,27 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 	- **Name**: Enter **Cloud\_VNet\_Production**.
 	- **Region**: Select the Azure location, **(Europe) West Europe**
 
-    ![Template deployment is selected in the search results.](Pictures/Net_1.png "Resource search results")
+    ![Create Virtual Network.](Pictures/Net_1.png "New Prodution VNet")
 
+5. Select **Next: IP Addresses**.
+6. On the IP Address enter **10.200.0.0/16**.
 
+    ![Create Virtual Network-IP Address.](Pictures/Net_2.png "New Prodution Subnet")
 
-    ![The Build your own template in the editor link is selected in the Template deployment blade.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image29.png "Template deployment blade")
+6. Select **+ Add subnet**, then on the Subnet Name enter **Cloud\_PR\_Subnet** and for Subnet address range add **10.200.0.0/24**.
+7. Select **Add**, then select **Review + create**. Leave the rest as default and select **Create**.
+8. In Create virtual network, select **Create**.
 
-5. On the **Edit template** blade, select **Load file**.
+9. Use the Above process to create a new Virtual Network and subnet.
+	- **Subscription**: Select your **Azure subscription**.
+	- **Resource group**: Select your existing resource group name,**BCDRRG**
+	- **Name**: Enter **Cloud\_VNet\_Disaster**.
+	- **Region**: Select the Azure location, **(Europe) West Europe**
+	- **IP Address**: **10.220.0.0/24**
+	- **Subnet Name**: **Cloud\_DR\_Subnet**
+	- **Address Range**: **10.220.0.0/27**
 
-    ![In the Edit template blade top menu, Load file is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image30.png "Edit template blade")
-
-6. From the `C:\HOL\Deployments` directory locate the **BCDROnPremPrimarySite.json** file and select **Open**.
-
-7. This will load the template into the Azure portal. Select **Save**.
+	![Create DR Virtual Network-IP Address.](Pictures/Net_7.png "New Prodution Subnet")
 
 8. On the **Custom deployment** blade, next to **Resource group** select your **BCDROnPremPrimarySite** resource group. Notice how the template picked the deployment region based on the location of your **BCDROnPremPrimarySite** resource group. Make sure this is *your* **Primary** region.
 
