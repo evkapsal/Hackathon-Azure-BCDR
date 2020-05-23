@@ -21,9 +21,9 @@ May 2020
   - [Abstract](#abstract)
   - [Overview](#overview)
   - [Solution architecture](#solution-architecture)
-    - [Environment: Azure (Azure)](#environment-on-premises-migrate-to-azure)
-    - [Environment: On Premises (failover to Azure)](#environment-azure-iaas-failover-region-to-region)
-    - [Environment: Azure PaaS (Log Analytics and Azure Monitor)](#environment-azure-paas-high-availability-with-seamless-failover)
+    - [Environment: Azure (Azure)](#environment-azure)
+    - [Environment: On Premises (failover to Azure)](#environment-on-premises)
+    - [Environment: Azure PaaS (Log Analytics and Azure Monitor)](#environment-azure-paas)
   - [Requirements](#requirements)
   - [Exercise 1: Prepare Azure Infrastructure](#exercise-1-prepare-azure-infrastructure)
     - [Task 1: Create Resource Group](#task-1-create-resource-group)
@@ -124,43 +124,25 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
     ![Notification Create Resource Group](Pictures/RG_3.png "Go To Resource Group")
 
-5. On the **Edit template** blade, select **Load file**.
 
-    ![In the Edit template blade menu, Load file is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image30.png "Edit template blade")
+### Task 2: Deploy Virtual Networks
 
-6. From the `C:\HOL\Deployments` directory, locate the **BCDRIaaSPrimarySite.json** file and select **Open**.
+1. From **Your Browser**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
-7. This will load the template into the Azure portal. Select **Save**.
+2. Select **+Create a resource** and then search for **Virtual Networks**.
 
-    ![Screenshot of the Save button.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image31.png "Save button")
 
-8. On the **Custom deployment** blade, select your **BCDRIaaSPrimarySite** resource group. Notice how the template picked the deployment region based on the location of your **BCDRIaaSPrimarySite** resource group. Make sure this is *your* **Primary** region.
+3. Select **Add**.
 
-    ![In the Custom deployment blade, fields are populated based on the BCDRIaaSPrimarySite resource group. A call out highlights the Location field that is set to the Primary region value.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image32.png "Custom deployment blade")
+4. On the Virtual Network Wizard enter the following.
+	- **Subscription**: Select your **Azure subscription**.
+	- **Resource group**: Select your existing resource group name,**BCDRRG**
+	- **Name**: Enter **Cloud\_VNet\_Production**.
+	- **Region**: Select the Azure location, **(Europe) West Europe**
 
-9. Next, update the **Domain Controller DNS Name** in the **Settings** area. This will be the DNS name for the Active Directory Domain controller that will be your jump box into the IaaS environment. The name will need to be lowercase and 3-24 characters consisting of letters & numbers and be unique to all of Azure. In the example, the DNS name `bcdrdc8675309` was used.
+    ![Template deployment is selected in the search results.](Pictures/Net_1.png "Resource search results")
 
-    ![In the Settings section, the Domain Controller DNS Name field is populated.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image33.png "Settings section")
 
-10. Finally, select **I agree to the terms and conditions stated above** and **Pin to dashboard.** Select **Purchase** to start the deployment.
-
-    ![The check boxes for pin to dashboard and I agree to the terms and conditions are checked. The Purchase button is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image34.png "Purchase button")
-
-> **Note:** This deployment will take at least 60 minutes, but you can continue to the next task.
-
-### Task 2: Deploy on-premises environment
-
-1. From the **LABVM**, open Internet Explorer and connect to the Azure portal at: <https://portal.azure.com>.
-
-2. Select **+Create a resource** and then search for **Template Deployment**.
-
-    ![In the Azure portal New blade, Template Deployment is in the search field.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image27.png "Azure portal, New blade")
-
-3. Select **Template deployment** and then **Create**.
-
-    ![Template deployment is selected in the search results.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image28.png "Resource search results")
-
-4. On the **Template deployment** blade, select **Build your own template in the editor**.
 
     ![The Build your own template in the editor link is selected in the Template deployment blade.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image29.png "Template deployment blade")
 
