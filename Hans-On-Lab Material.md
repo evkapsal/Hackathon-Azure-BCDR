@@ -190,7 +190,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 5. Search for and select **Virtual Network Gateways**.
 
-	![Search VPN.](Pictures/Net_10.png "Search Virtual Network Gateways")
+	![Search VPN.](Pictures/Net_10.PNG "Search Virtual Network Gateways")
 
 6. Select **+ Add**
 
@@ -203,7 +203,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 	- **SKU**: Select **Basic**.
 	- **Generation**: Select **Generation1**.
 
-	![Network Gateway VPN-1.](Pictures/Net_11.PNG "Create Virtual Network Gateways")
+	![Network Gateway VPN-1.](Pictures/Net_11.png "Create Virtual Network Gateways")
 
 	- **Virtual Network**: Select your Production Network **Cloud\_VNet\_Production**
 	- **Subnet Name**: **Cloud\_DR\_Subnet**
