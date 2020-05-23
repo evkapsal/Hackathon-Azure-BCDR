@@ -116,7 +116,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 	- **Region**: Select an Azure location, such as **West Europe**
 
 
-    ![Template deployment is selected in the search results.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image28.png "Resource search results")
+    ![Create Resource GRoup.](Pictures/RG_2.png "Resource Group")
 
 4. On the **Custom deployment** blade, select **Build your own template in the editor**.
 
