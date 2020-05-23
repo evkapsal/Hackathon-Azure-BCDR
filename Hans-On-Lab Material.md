@@ -21,17 +21,17 @@ May 2020
   - [Abstract](#abstract)
   - [Overview](#overview)
   - [Solution architecture](#solution-architecture)
-    - [Environment: On-premises (migrate to Azure)](#environment-on-premises-migrate-to-azure)
-    - [Environment: Azure IaaS (failover region to region)](#environment-azure-iaas-failover-region-to-region)
-    - [Environment: Azure PaaS (high-availability with seamless failover)](#environment-azure-paas-high-availability-with-seamless-failover)
+    - [Environment: Azure (Azure)](#environment-on-premises-migrate-to-azure)
+    - [Environment: On Premises (failover to Azure)](#environment-azure-iaas-failover-region-to-region)
+    - [Environment: Azure PaaS (Log Analytics and Azure Monitor)](#environment-azure-paas-high-availability-with-seamless-failover)
   - [Requirements](#requirements)
-  - [Exercise 1: Deploy Azure environments](#exercise-1-deploy-azure-environments)
-    - [Task 1: Deploy Azure IaaS](#task-1-deploy-azure-iaas)
-    - [Task 2: Deploy on-premises environment](#task-2-deploy-on-premises-environment)
-    - [Task 3: Deploy Azure PaaS environment](#task-3-deploy-azure-paas-environment)
+  - [Exercise 1: Prepare Azure Infrastructure](#exercise-1-prepare-azure-infrastructure)
+    - [Task 1: Create Resource Group](#task-1-create-resource-group)
+    - [Task 2: Deploy Virtual Networks](#task-2-deploy-virtual-networks)
+    - [Task 3: Deploy VPN Service](#task-3-deploy-VPN-Service)
   - [Exercise 2: Configure BCDR services](#exercise-2-configure-bcdr-services)
     - [Task 1: Create Azure recovery services vault](#task-1-create-azure-recovery-services-vault)
-    - [Task 2: Deploy Azure automation](#task-2-deploy-azure-automation)
+    - [Task 2: Connect your OnPremises Environment](#task-2-Connect-your-onpremises-environment)
   - [Exercise 3: Configure environments for failover](#exercise-3-configure-environments-for-failover)
     - [Task 1: Configure on-premises to Azure IaaS failover](#task-1-configure-on-premises-to-azure-iaas-failover)
     - [Task 2: Configure IaaS SQL Always On availability groups for region to region failover](#task-2-configure-iaas-sql-always-on-availability-groups-for-region-to-region-failover)
@@ -67,53 +67,54 @@ Below are diagrams of the solution architecture you will build in this lab. Plea
 
 ### Environment: Azure 
 
-- **Background:** Your existing environment will be used with Hyper-V or VMWare instances. You will choose an existing VM or create a new Linux or Windows VM to protect through Azure Site Recovery.
+- **Background:** You will prepare the Azure Infrastructure in order to provide Disaster Recovery and Monitoring Services to your On premises Infrastructure. Several Microsoft Azure solutions can be also enabled to provide your Security Insights, Network Monitoring and Dependency Mapping. 
 
-- **Goal using Azure BCDR:** Your goal for this environment will be to enable Business Continuity to this server/application to Azure IaaS with a one-direction failover.
+- **Goal using Azure BCDR:** Your goal for this environment will be to enable the Azure Environment to host your Disaster Environment infrastructure. Service enablement, Virtual Networks and Log Analytics workspace.
 
-    ![The on-premises migration diagram includes on-premises, Azure platform, and secondary region sections. On-premises has a Hyper-V host and a Linux on-premises virtual machine. Azure Platform uses Azure Site Recovery. The secondary region has an on-premises Linux VM as well.](Pictures/Azure_Environment.png "On-premises migration diagram")
+    ![Diagram of the Azure Services that will be enabled.](Pictures/Azure_Environment.png "Azure Environment diagram")
 
 ### Environment: On premises
 
-- **Background:** This environment will consist of two Azure Virtual Networks deployed to your Primary and Secondary site with an AD domain, IIS Web servers and Microsoft SQL servers that you will configure into a SQL Always On Availability Group.
+- **Background:** Your existing environment will be used with Hyper-V or VMWare virtualization. You will choose an existing VM or create a new Linux or Windows VM to protect it through Azure Site Recovery..
 
-- **Goal using Azure BCDR:** Your goal for this environment is to have the ability to have a one-click failover process using Azure Site Recovery in either direction. The users will have one URL that they will use to connect to your application regardless of where the application is running.
+- **Goal using Azure BCDR:** Your goal for this environment will be to enable Business Continuity to this server/application to Azure IaaS with a one-direction failover.
 
-    ![Diagram of the Azure IaaS failover region to region solution.](Pictures/OnPrem_Environment.png "Azure IaaS failover region to region solution")
+    ![Diagram of the on premises infrastructure and connectivity to azure paas services.](Pictures/OnPrem_Environment.png "Azure IaaS failover region to region solution")
 
-### Environment: Azure PaaS (high-availability with seamless failover)
+### Environment: Azure PaaS Services (Log Analytics Solutions)
 
-- **Background:** This environment will deploy an Azure Web App and Azure SQL Server in both the Primary and Secondary locations. You will configure SQL Database Failover groups to allow for seamless failover of the database.
+- **Background:** You will be able to enable Monitoring Solutions for your on premises and cloud environment through Azure Log Analytics Service. Also Azure Security Center with assess your existing environment and through Azure Monitor you will be able to review your systems insights.
 
-- **Goal using Azure BCDR:** Your goal for this environment is never to have the users experience any downtime if issues arise with your Web App or the SQL Database. The users will have one URL that they will use to connect to your application regardless of where the application or database is running.
+- **Goal using Azure BCDR:** Your goal for this environment is to configure the PaaS services, connect your agents to the service, enable the solutions and review the results.
 
-![Diagram of the Azure PaaS high availability with seamless failover solution.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image4.png "Azure PaaS high availability with seamless failover diagram")
+![Diagram of the Azure PaaS Services and Solutions.](Pictures/Monitor_Environment.png "Azure PaaS high availability with seamless failover diagram")
 
 ## Requirements
 
 1. An Azure Subscription with full access to the environment.
 
-## Exercise 1: Deploy Azure environments
+## Exercise 1: Prepare Azure Infrastructure
 
-Duration: 15 minutes (Deployments can take as long as 75 minutes)
+Duration: 30 minutes
 
-In this exercise, you will use Azure ARM templates to deploy the following environments used in this HOL:
+In this exercise, you will follow the Step By Step Guide to deploy the Azure Services and configure the environment.
 
-- **Azure IaaS:** This environment will consist of two Virtual Networks deployed to your Primary and Secondary site with an AD Domain, IIS Web Servers and Microsoft SQL Servers that you will configure into a SQL Always On Availability Group.
+- **Azure Environment:** This environment will consist of two Virtual Networks deployed on one resource group. Services that be will enables will deployed under this Resource Group.
 
-- **On-premises:** This environment will deploy a Hyper-V Host that will host a Linux VM to simulate a web application deployed into on-premises data center on a single VM. Your goal for this environment will be to migrate this application to Azure IaaS with a one-direction failover.
+### Task 1: Create Resource Group
 
-- **Azure PaaS:** This environment will deploy an Azure Web App and Azure SQL Server in both the Primary and Secondary locations.
+1. From **Your Browser**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
-### Task 1: Deploy Azure IaaS
+2. Select **+Create a resource** and then search for **Resource Group**.
+3. Select **Add**
 
-1. From **LABVM**, open Internet Explorer and connect to the Azure portal at: <https://portal.azure.com>.
+    ![Add Resource Group.](Pictures/RG_1.png "Resource Group Create")
 
-2. Select **+Create a resource** and then search for **Template Deployment**.
+3. Enter the following values:
+	- **Subscription**: Select your **Azure subscription**.
+	- **Resource group**: Enter a new resource group name, such **BCDRRG**
+	- **Region**: Select an Azure location, such as **West Europe**
 
-    ![Template Deployment is typed in the New blade search field.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image27.png "Azure Portal New blade")
-
-3. Select **Template deployment** and then **Create**.
 
     ![Template deployment is selected in the search results.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image28.png "Resource search results")
 
