@@ -118,9 +118,11 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
     ![Create Resource GRoup.](Pictures/RG_2.png "Resource Group")
 
-4. On the **Custom deployment** blade, select **Build your own template in the editor**.
+4. Select **Review + Create**.
+5. Select **Create**. It takes a few seconds to create a resource group
+6. Select **Refresh** from the top menu to refresh the resource group list, and then select the newly created resource group to open it. Or select **Notification** (the bell icon) from the top, and then select **Go to resource group** to open the newly created resource group.
 
-    ![In the Custom deployment blade, the link to build your own template in the editor is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image29.png "Custom deployment blade")
+    ![Notification Create Resource Group](Pictures/RG_3.png "Go To Resource Group")
 
 5. On the **Edit template** blade, select **Load file**.
 
