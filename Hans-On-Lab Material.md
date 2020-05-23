@@ -160,7 +160,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 	- **Subnet Name**: **Cloud\_DR\_Subnet**
 	- **Address Range**: **10.220.0.0/27**
 
-	![Create DR Virtual Network-IP Address.](Pictures/Net_7.png "New Prodution Subnet")
+	![Create DR Virtual Network-IP Address.](Pictures/Net_7.png "New Production Subnet")
 
 8. On the **Custom deployment** blade, next to **Resource group** select your **BCDROnPremPrimarySite** resource group. Notice how the template picked the deployment region based on the location of your **BCDROnPremPrimarySite** resource group. Make sure this is *your* **Primary** region.
 
