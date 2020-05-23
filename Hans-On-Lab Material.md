@@ -71,7 +71,7 @@ Below are diagrams of the solution architecture you will build in this lab. Plea
 
 - **Goal using Azure BCDR:** Your goal for this environment will be to enable Business Continuity to this server/application to Azure IaaS with a one-direction failover.
 
-    ![The on-premises migration diagram includes on-premises, Azure platform, and secondary region sections. On-premises has a Hyper-V host and a Linux on-premises virtual machine. Azure Platform uses Azure Site Recovery. The secondary region has an on-premises Linux VM as well.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image2.png "On-premises migration diagram")
+    ![The on-premises migration diagram includes on-premises, Azure platform, and secondary region sections. On-premises has a Hyper-V host and a Linux on-premises virtual machine. Azure Platform uses Azure Site Recovery. The secondary region has an on-premises Linux VM as well.](Pictures/Azure_Environment.png "On-premises migration diagram")
 
 ### Environment: Azure IaaS (failover region to region)
 
