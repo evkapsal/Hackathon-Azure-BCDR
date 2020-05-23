@@ -106,6 +106,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 1. From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
 2. Select **+Create a resource** and then search for **Resource Group**.
+
 3. Select **Add**
 
     ![Add Resource Group.](Pictures/RG_1.png "Resource Group Create")
@@ -119,7 +120,9 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
     ![Create Resource GRoup.](Pictures/RG_2.png "Resource Group")
 
 4. Select **Review + Create**.
-5. Select **Create**. It takes a few seconds to create a resource group
+
+5. Select **Create**. It takes a few seconds to create a resource group.
+
 6. Select **Refresh** from the top menu to refresh the resource group list, and then select the newly created resource group to open it. Or select **Notification** (the bell icon) from the top, and then select **Go to resource group** to open the newly created resource group.
 
     ![Notification Create Resource Group](Pictures/RG_3.png "Go To Resource Group")
@@ -130,7 +133,6 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 1. From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
 2. Select **+Create a resource** and then search for **Virtual Networks**.
-
 
 3. Select **Add**.
 
@@ -143,12 +145,15 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
     ![Create Virtual Network.](Pictures/Net_1.png "New Prodution VNet")
 
 5. Select **Next: IP Addresses**.
+
 6. On the IP Address enter **10.200.0.0/16**.
 
     ![Create Virtual Network-IP Address.](Pictures/Net_2.png "New Prodution Subnet")
 
 6. Select **+ Add subnet**, then on the Subnet Name enter **Cloud\_PR\_Subnet** and for Subnet address range add **10.200.0.0/24**.
+
 7. Select **Add**, then select **Review + create**. Leave the rest as default and select **Create**.
+
 8. In Create virtual network, select **Create**.
 
 9. Use the Above process to create a new Virtual Network and subnet.
@@ -162,53 +167,58 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 	![Create DR Virtual Network-IP Address.](Pictures/Net_7.PNG "New Production Subnet")
 
-8. On the **Custom deployment** blade, next to **Resource group** select your **BCDROnPremPrimarySite** resource group. Notice how the template picked the deployment region based on the location of your **BCDROnPremPrimarySite** resource group. Make sure this is *your* **Primary** region.
 
-    ![In the Custom deployment blade, Basics section, fields are set to values based on your primary region.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image35.png "Custom deployment blade, Basics section")
+### Task 3: Deploy VPN Service
 
-9. Next, update the **Hyper-V Host DNS Name** in the **Settings** area. This will be the DNS name for the Hyper-V Host that you will use for this simulated on-premises environment. The name will need to be lowercase and 3-24 characters consisting of letters & numbers and be unique to all of Azure. In the example, the name `hypervhost8675309` was used.
+1. From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
-    ![In the Settings section, the Domain Controller DNS Name field is populated.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image36.png "Settings section")
+2. Search for and select **Virtual networks**.
 
-10. Finally, check **I agree to the terms and conditions stated above** and **Pin to dashboard**. Select **Purchase** to start the deployment.
+3. Select **Cloud\_VNet\_Production**.
 
-    ![The check boxes for pin to dashboard and I agree to the terms and conditions are checked. The Purchase button is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image34.png "Purchase button")
+4. From the left blade select **Subnets**.
+	
+	![Select Subnet](Pictures/Net_8.png "Subnet") 
 
-> **Note:** This deployment will take at least 20 minutes, but you can continue to the next task.
+3. Select **+ Gateway Subnet**.
 
-### Task 3: Deploy Azure PaaS environment
+4. On the **Add subnet** dialog box enter the following.
+	- **Name**: **Gateway Subnet**.
+	- **Address Range**: **10.200.254.0/24** and press **OK**.
 
-1. From the **LABVM**, open Internet Explorer and connect to the Azure portal at <https://portal.azure.com>.
+	![Create Gateway Subnet.](Pictures/Net_9.png "New Gateway Subnet") 
 
-2. Select **+Create a resource** and then search for **Template Deployment**.
+5. Search for and select **Virtual Network Gateways**.
 
-    ![In the Azure Portal New blade, Template Deployment is in the Search field.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image27.png "Azure Portal, New blade")
+	![Search VPN.](Pictures/Net_10.png "Search Virtual Network Gateways")
 
-3. Select **Template deployment** and then **Create**.
+6. Select **+ Add**
 
-    ![Template deployment is selected in the search results.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image28.png "Resources search results")
+7. In the **Create Virtual Network Gateway** enter the following details.
+	- **Subscription**: Select your **Azure subscription**.
+	- **Name**: Enter **Cloud\_VNet\_Production\_VPN**
+	- **Region**: Select your Azure location, **(Europe) West Europe**
+	- **Gateway Type**: Select **VPN**.
+	- **VPN Type**: Select **Route-based**.
+	- **SKU**: Select **Basic**.
+	- **Generation**: Select **Generation1**.
 
-4. On the **Custom deployment blade**, select **Build your own template in the editor**.
+	![Network Gateway VPN-1.](Pictures/Net_11.png "Create Virtual Network Gateways")
 
-    ![In the Custom deployment blade, the Build your own template in the editor link is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image29.png "Custom deployment blade")
+	- **Virtual Network**: Select your Production Network **Cloud\_VNet\_Production**
+	- **Subnet Name**: **Cloud\_DR\_Subnet**
+	- **Public IP Address**: Select **Create New**
+	- **Public IP Address Name**: Enter **VPN\_PROD\_IP**
+	- **Enable active-active mode**: Select **Disabled**
+	- **Configure BGP ASN**: Select **Disabled**
 
-5. On the **Edit template** blade, select **Load file**.
 
-    ![In the Edit template blade top menu, Load file is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image30.png "Edit template blade")
+	![Network Gateway VPN-2.](Pictures/Net_12.png "Create Virtual Network Gateways")
 
-6. From the `C:\HOL\Deployments` directory locate the **BCDRPaaSPrimarySite.json** file and select **Open**.
+8. Select **Review + create** and select **Create** to deploy.
 
-7. This will load the template into the Azure portal. Select **Save**.
+> **Note: ** This step can take up to 45 minutes to complete, but you can continue to the next exercise.
 
-8. On the **Custom deployment** blade, next to **Resource group** select your **BCDRPaaSPrimarySite** resource group. Notice how the template picked the deployment region based on the location of your **BCDRPaaSPrimarySite** resource group. Make sure this is *your* **Primary** region.
-
-    ![On the Custom deployment blade in the Basics section, fields are set to values matching the primary resource group.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image37.png "Custom deployment blade")
-
-9. Finally, select the **I agree to the terms and conditions stated above** and **Pin to dashboard.** Select **Purchase** to start the deployment.
-
-    ![The check boxes for pin to dashboard and I agree to the terms and conditions are checked. The Purchase button is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image34.png "Purchase button")
-
-> **Note:** This deployment will take at least 10 minutes, but you can continue to the next task.
 
 ## Exercise 2: Configure BCDR services
 
