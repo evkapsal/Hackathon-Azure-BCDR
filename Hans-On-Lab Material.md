@@ -103,7 +103,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 ### Task 1: Create Resource Group
 
-1. From **Your Browser**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+1. From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
 2. Select **+Create a resource** and then search for **Resource Group**.
 3. Select **Add**
@@ -127,7 +127,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 ### Task 2: Deploy Virtual Networks
 
-1. From **Your Browser**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+1. From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
 2. Select **+Create a resource** and then search for **Virtual Networks**.
 
