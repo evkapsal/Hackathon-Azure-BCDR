@@ -65,21 +65,21 @@ The Business continuity and disaster recovery hands-on Lab is an exercise that w
 
 Below are diagrams of the solution architecture you will build in this lab. Please study this carefully, so you understand the whole of the solution as you are working on the various components.
 
-### Environment: On-premises (migrate to Azure)
+### Environment: Azure 
 
-- **Background:** Your existing environment will be used with Hyper-V or VMWare instances. You will choose an existing VM or create a new Linux or Windows VM to simulate a Linux, Apache, PHP, and MySQL (LAMP) based Web application deployed into an on-premises data center on a single VM.
+- **Background:** Your existing environment will be used with Hyper-V or VMWare instances. You will choose an existing VM or create a new Linux or Windows VM to protect through Azure Site Recovery.
 
 - **Goal using Azure BCDR:** Your goal for this environment will be to enable Business Continuity to this server/application to Azure IaaS with a one-direction failover.
 
     ![The on-premises migration diagram includes on-premises, Azure platform, and secondary region sections. On-premises has a Hyper-V host and a Linux on-premises virtual machine. Azure Platform uses Azure Site Recovery. The secondary region has an on-premises Linux VM as well.](Pictures/Azure_Environment.png "On-premises migration diagram")
 
-### Environment: Azure IaaS (failover region to region)
+### Environment: On premises
 
 - **Background:** This environment will consist of two Azure Virtual Networks deployed to your Primary and Secondary site with an AD domain, IIS Web servers and Microsoft SQL servers that you will configure into a SQL Always On Availability Group.
 
 - **Goal using Azure BCDR:** Your goal for this environment is to have the ability to have a one-click failover process using Azure Site Recovery in either direction. The users will have one URL that they will use to connect to your application regardless of where the application is running.
 
-    ![Diagram of the Azure IaaS failover region to region solution.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image3.png "Azure IaaS failover region to region solution")
+    ![Diagram of the Azure IaaS failover region to region solution.](Pictures/OnPrem_Environment.png "Azure IaaS failover region to region solution")
 
 ### Environment: Azure PaaS (high-availability with seamless failover)
 
