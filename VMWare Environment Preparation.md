@@ -66,17 +66,6 @@ You must have a user with one of the following permissions set in Azure Active D
 > [!IMPORTANT]
 > Don't change resource configurations, such as memory, cores, and CPU restriction, or modify or delete installed services or files on the configuration server after deployment. These types of changes affect the registration of the configuration server with Azure services and the performance of the configuration server.
 
-## Add an additional adapter
-
-> [!NOTE]
-> Two NICs are required if you plan to retain the IP addresses of the source machines on failover and want to fail back to on-premises later. One NIC is connected to source machines, and the other NIC is used for Azure connectivity.
-
-If you want to add an additional NIC to the configuration server, add it before you register the server in the vault. Adding additional adapters isn't supported after registration.
-
-1. In the vSphere Client inventory, right-click the VM and select **Edit Settings**.
-2. In **Hardware**, select **Add** > **Ethernet Adapter**. Then select **Next**.
-3. Select an adapter type and a network.
-4. To connect the virtual NIC when the VM is turned on, select **Connect at power-on**. Then select **Next** > **Finish** > **OK**.
 
 ## Register the configuration server with Azure Site Recovery services
 
@@ -105,8 +94,6 @@ If you want to add an additional NIC to the configuration server, add it before 
 
     |Scenario   |Steps to follow  |
     |---------|---------|
-    |Can I download and install MySQL manually?     |  Yes. Download the MySQL application, place it in the folder **C:\Temp\ASRSetup**, and then install manually. After you accept the terms and select **Download and install**, the portal says *Already installed*. You can proceed to the next step.       |
-    |Can I avoid download of MySQL online?     |   Yes. Place your MySQL installer application in the folder **C:\Temp\ASRSetup**. Accept the terms, select **Download and install**, and the portal uses the installer you added to install the application. After installation finishes, proceed to the next step.    |
     |I want to download and install MySQL through Azure Site Recovery.    |  Accept the license agreement, and select **Download and install**. After installation finishes, proceed to the next step.       |
 
 5. On **Validate appliance configuration**, prerequisites are verified before you continue.
