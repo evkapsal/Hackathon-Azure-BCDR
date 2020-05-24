@@ -32,8 +32,16 @@ May 2020
   - [Exercise 2: Configure BCDR services](#exercise-2-configure-bcdr-services)
 	- [Task 1: Create Azure recovery services vault](#task-1-create-azure-recovery-services-vault)
 	- [Task 2: Connect your On Premises Environment](#task-2-connect-your-on-premises-environment)
+  - [Exercise 3: Configure Log Analytics Workspace](#exercise-3-configure-log-analytics-workspace)
+	- [Task 1: Create Log Analytics Workspace](#task-1-create-azure-recovery-services-vault)
+	- [Task 2: Deploy Log Analytics Agents](#task-2-connect-your-on-premises-environment)
+	- [Task 3: Deploy Service Map Solution](#task-3-deploy-service-map-solution)
+	- [Task 4: Deploy Security Center Solution](#task-4-deploy-security-center-solution)
+	- [Task 5: Deploy Network Monitor Solution](#task-5-deploy-network-monitor-solution)
+	- [Task 6: Enable Azure Monitor](#task-6-enable-azure-monitor)
 
 <!-- /TOC -->
+
 
 # Business continuity and disaster recovery hands-on lab step-by-step 
 
@@ -245,3 +253,17 @@ In this exercise, you will create and configure the services that will make it p
 
 2. For your VMWare Environment Follow the **VMWare** guide. [VMWare Environment](VMWare%20Environment%20Preparation.md) 
 
+
+## Exercise 3: Configure Log Analytics Workspace
+
+### Task 1: Create Log Analytics Workspace
+
+### Task 2: Deploy Log Analytics Agents
+
+### Task 3: Deploy Service Map Solution
+
+### Task 4: Deploy Security Center Solution
+
+### Task 5: Deploy Network Monitor Solution
+
+### Task 6: Enable Azure Monitor Solution
