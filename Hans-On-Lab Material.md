@@ -1,4 +1,4 @@
-![Microsoft Hellas Hackathon](Pictures/front_1.png "Microsoft Hellas Workshop")
+![Microsoft Hellas Hackathon](Pictures/upper_1.png "Microsoft Hellas Workshop")
 
 <div class="MCWHeader1">
 Business continuity and Disaster recovery
