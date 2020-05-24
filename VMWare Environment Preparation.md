@@ -1,5 +1,11 @@
 ![VMware Logo](Pictures/vmware.png)
 
+## Exercise 3: Configure VMWare Environments for failover.
+
+Duration: 30 minutes
+
+In this exercise, you will configure the VMWare environments to use BCDR technologies found in Azure. The environment has unique configurations that must be completed to ensure their availability in the event of a disaster.
+
 # Deploy a configuration server
 
 You deploy an on-premises configuration server when you use [Azure Site Recovery](site-recovery-overview.md) for disaster recovery of VMware VMs and physical servers to Azure. The configuration server coordinates communications between on-premises VMware and Azure. It also manages data replication. This article walks you through the steps needed to deploy the configuration server when you're replicating VMware VMs to Azure. If you need to set up a configuration server for physical server replication, see [Set up the configuration server for disaster recovery of physical servers to Azure](physical-azure-set-up-source.md).
