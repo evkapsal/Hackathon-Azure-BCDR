@@ -39,3 +39,8 @@ Business Continuity, Disaster Recovery ,Log Analytics, Security Center, Networki
 Please start your hands on lab [Material](Hans-On-Lab%20Material.md) and follow the guide.
 
 ![Start Hands on Lab.](Pictures/start.PNG "Hands on lab material")
+
+
+## Related references
+
+- [MCW](https://github.com/Microsoft/MCW)
