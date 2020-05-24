@@ -241,7 +241,7 @@ In this exercise, you will create and configure the services that will make it p
 
 ### Task 2: Connect your On Premises Environment
 
-1. For your Hyper-V Environment Follow the **Hyper-V** guide.[Hyper-V Environment](Hyper-V-Environment-Preparation.md) 
+1. For your Hyper-V Environment Follow the **Hyper-V** guide.[Hyper-V Environment](Hyper-V%20Environemt%20Preparation.md) 
 
-2. For your VMWare Environment Follow the **VMWare** guide. [VMWare Environment](VMWare-Environment-Preparation.md.md) 
+2. For your VMWare Environment Follow the **VMWare** guide. [VMWare Environment](VMWare%20Environment%20Preparation.md) 
 
