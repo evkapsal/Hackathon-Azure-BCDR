@@ -1,4 +1,4 @@
-![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Hellas Hackathon](Pictures/front_1.png "Microsoft Hellas Workshop")
 
 <div class="MCWHeader1">
 Business continuity and Disaster recovery
@@ -251,7 +251,7 @@ In this exercise, you will create and configure the services that will make it p
 
     ![Screenshot of the Backup / Site Recovery tabs with Site Recovery tab selected.](Pictures/DR_4.png "Backup / Site Recovery tabs")
 
-### Task 2: Deploy Azure automation
+### Task 2: Configure Disaster Environment
 
 1. Open the Azure portal at: <https://portal.azure.com>.
 
@@ -390,68 +390,7 @@ In this exercise, you will create and configure the services that will make it p
 
 > **Note:** When you configure the ASR Recovery Plan for the IaaS deployment you will use the SQL Runbook as a Pre-Failover Action and the Web Runbook as a Post-Failover action. They will run both ways and have been written to take the "Direction", of the failover into account when running.
 
-## Exercise 3: Configure environments for failover
 
-Duration: 90 minutes
-
-In this exercise, you will configure the three environments to use BCDR technologies found in Azure. Each environment has unique configurations that must be completed to ensure their availability in the event of a disaster.
-
-> **Note**: Make sure prior to starting each task that the deployment that you started in Exercise 1 has completed for each as you come to that task. This can be determined by reviewing the deployments for each Resource group in the Azure portal. If it says Succeeded, then you can begin the task.
-
-### Task 1: Configure on-premises to Azure IaaS failover
-
-In this task, the **OnPremVM** will be configured to replicate to Azure and be ready to failover to the **BCDRIaaSSecondarySite**. This will consist of configuring your Hyper-V host with the ASR provider and then enabling replication of the VM to the Recovery Service Vault.
-
-1. From the Azure portal, open the **BCDRRSV** Recovery Services Vault located in the **BCDRAzureSiteRecovery** resource group.
-
-2. Select **Site Recovery** in the **Getting Started** area of **BCDRRSV** blade.
-
-    ![In the Recovery Services vault blade, under Getting Started, Site Recovery is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image76.png "Recovery Services vault blade")
-
-3. Next, select **Prepare Infrastructure** in the **For On-Premises Machines** section. This will start you down a path of various steps to configure your VM that is running on Hyper-V on-premises to be replicated to Azure.
-
-    ![In the For On-Premises Machines section, Prepare Infrastructure is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image77.png "For On-Premises Machines section")
-
-4. On **Step 1 Protection Goal** select the following inputs and then select **OK**:
-
-    - **Where are your machines located?**: On-premises
-    - **Where do you want to replicate your machines to?**: To Azure
-    - **Are you performing a migration?**: No
-    - **I understand, but I would like to continue with Azure Site Recovery**: checked
-    - **Are your machines virtualized?**: Yes, with Hyper-V  (Your VM is running as a nested VM in Azure).
-    - **Are you using System Center VMM to manage your Hyper-V hosts?**: No
-
-    ![Fields in the Protection goal blade are set to the previously defined values.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image78.png "Protection goal blade")
-
-5. On **Step 2 Deployment planning**, confirm you have completed deployment planning by selecting **Yes, I have done it** then select **OK**.
-
-    > **Note**: You can read more about planning an ASR to deployment here:
-    >
-    > <https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-hyper-v-deployment-planner>
-
-    ![In the Deployment planning blade, Yes, I have done it is selected from a dropdown list.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image79.png "Deployment planning blade")
-
-6. On **Step 3 Prepare source** select **+Hyper-V Site**.
-
-    ![In the top menu of the Prepare source blade, +Hyper-V Site is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image80.png "Prepare source blade")
-
-7. On the **Create Hyper-V site** blade, enter the name: `OnPremHyperVSite`. Select **OK**.
-
-    ![OnPremHyperVSite is in the Name field on the Create Hyper-V site blade.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image81.png "Create Hyper-V site blade")
-
-8. The portal will deploy the site providing you notifications. Wait for the creation process to complete, and the ASR portal will update once this is done. Your new site is now shown under **Step 1: Select Hyper-V site**.
-
-    ![The Successfully completed creating Hyper-V site message displays.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image82.png "Success message")
-
-    ![Under Step 1: Select Hyper-V site, OnPremHyperVSite is selected in the dropdown list.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image83.png "Step 1: Select Hyper-V site")
-
-9. Next select **+Hyper-V Server**.
-
-    ![In the top menu of the Prepare source blade, Hyper-V Server is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image84.png "Prepare source blade")
-
-10. A new blade will appear. You will need to download the vault registration key to register the host in the Hyper-V site of ASR. Select the Download button which will save the file to your Downloads folder on the **LABVM**.
-
-    ![In the Add Server blade, the Download button is selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image85.png "Add Server blade")
 
 11. Open a **NEW** tab in your web browser and connect again to the Azure Portal at <https://portal.azure.com>.
 
