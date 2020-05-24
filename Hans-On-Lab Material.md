@@ -224,29 +224,28 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 Duration: 30 minutes
 
-In this exercise, you will create and configure the services that will make it possible to failover both the on-premises and Azure IaaS environments. These will include a Recovery Services Vault used for Azure Site Recovery and an Azure Automation account.
-
-![The Automation region contains an Azure automation account, and two PowerShell scripts: ASRRunBookSQL, and ASRRunBookWEB. The Secondary region has an Azure Site Recovery, and a recovery services vault.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image38.png "Automation and Secondary Regions")
+In this exercise, you will create and configure the services that will make it possible to failover  the on-premises environment. These will include a Recovery Services Vault used for Azure Site Recovery.
 
 ### Task 1: Create Azure recovery services vault
 
-1. Using **LABVM**, connect to the Azure portal using your web browser at <https://portal.azure.com>.
+1. From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
 2. Select **+Create a resource**, then enter **Backup and Site Recovery**, and select **Create**.
 
-    ![Screenshot of the Backup and Site Recovery Screen with the Create button selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image39.png "Backup and Site Recovery Screen Create Button")
+    ![Screenshot of the Backup and Site Recovery Screen with the Create button selected.](Pictures/DR_2.png "Backup and Site Recovery Screen Create Button")
 
 3. Complete the **Recovery Services Vault** blade using the following inputs, then select **Create**:
 
-    - **Name**: `BCDRRSV`
+    - **Name**: `BCDRCLOUDSRV`
+    - **Resource Group**: Select **BCDRRG**.
+    - **Location**: Select **West Europe**.
+    - Select **Review + Create**. It takes a few seconds to create the Vault.
 
-    - **Resource Group**: BCDRAzureSiteRecovery
-
-    - **Location**: Central US *(your secondary region)*
+	![Create Recovery Services Vault Wizard.](Pictures/DR_5.png "Backup / Site Recovery Wizard")
 
 4. Once the **BCDRRSV** Recovery Service Vault has been created, open it in the Azure portal. Select the "Site Recovery" tab.
 
-    ![Screenshot of the Backup / Site Recovery tabs with Site Recovery tab selected.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image40.png "Backup / Site Recovery tabs")
+    ![Screenshot of the Backup / Site Recovery tabs with Site Recovery tab selected.](Pictures/DR_4.png "Backup / Site Recovery tabs")
 
 5. This is your dashboard for Azure Site Recovery (ASR), for the HOL.
 
