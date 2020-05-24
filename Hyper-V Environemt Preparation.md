@@ -1,8 +1,10 @@
+![Hyper-V Logo.](Pictures/hyper.jpeg "Hyper-V Logo")
+
 ## Exercise 3: Configure Hyper-V Environments for failover
 
 Duration: 30 minutes
 
-In this exercise, you will configure the three environments to use BCDR technologies found in Azure. Each environment has unique configurations that must be completed to ensure their availability in the event of a disaster.
+In this exercise, you will configure the Hyper-V environments to use BCDR technologies found in Azure. The environment has unique configurations that must be completed to ensure their availability in the event of a disaster.
 
 ### Task 1: Configure on-premises to Azure IaaS failover
 
