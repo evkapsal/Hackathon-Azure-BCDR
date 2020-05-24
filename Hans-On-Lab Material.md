@@ -245,11 +245,11 @@ In this exercise, you will create and configure the services that will make it p
 
 4. Once the **BCDRRSV** Recovery Service Vault has been created, open it in the Azure portal. Select the "Site Recovery" tab.
 
-    ![Screenshot of the Backup / Site Recovery tabs with Site Recovery tab selected.](Pictures/DR_4.png "Backup / Site Recovery tabs")
+    ![Screenshot of the Backup / Site Recovery tabs with Site Recovery tab selected.](Pictures/DR_3.png "Backup / Site Recovery tabs")
 
 5. This is your dashboard for Azure Site Recovery (ASR), for the HOL.
 
-    ![The Azure Site Recovery dashboard displays.](images/Hands-onlabstep-bystep-Businesscontinuityanddisasterrecoveryimages/media/image41.png "Azure Site Recovery dashboard")
+    ![Screenshot of the Backup / Site Recovery tabs with Site Recovery tab selected.](Pictures/DR_4.png "Backup / Site Recovery tabs")
 
 ### Task 2: Deploy Azure automation
 
