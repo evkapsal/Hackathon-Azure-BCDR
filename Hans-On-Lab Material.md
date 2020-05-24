@@ -266,4 +266,4 @@ In this exercise, you will create and configure the services that will make it p
 
 ### Task 5: Deploy Network Monitor Solution
 
-### Task 6: Enable Azure Monitor Solution
+### Task 6: Enable Azure Monitor
