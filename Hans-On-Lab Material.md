@@ -218,7 +218,7 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 ## Exercise 2: Configure BCDR services
 
-Duration: 30 minutes
+Duration: 45 minutes
 
 In this exercise, you will create and configure the services that will make it possible to failover  the on-premises environment. These will include a Recovery Services Vault used for Azure Site Recovery.
 
@@ -256,6 +256,8 @@ In this exercise, you will create and configure the services that will make it p
 
 
 ## Exercise 3: Configure Log Analytics Workspace
+
+Duration: 30 minutes
 
 ### Task 1: Create Log Analytics Workspace
 
@@ -443,7 +445,83 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
 
 10. In order to go deeper into the solution please follow the guide [Here](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/wire-data#using-the-wire-data-20-solution)
 
+11. Use the  guide above to install **Network Monitor Solution**
+
 ### Task 6: Enable Azure Monitor
 
 1.  From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+
+2. On the top search box enter **Monitor**
+	
+	![Azure portal](Pictures/mon_1.png)
+
+3. Go to Virtual Machines in the Get Started and go to **Workspace configuration** and select to configure your **Log Analytics Workspace**. May an update to workspace is needed, the wizard will inform you to update the workspace.
+
+	![Azure portal](Pictures/mon_2.png)
+
+4. In order to integrate **Azure Monitor** with your **Log Analytics** virtual Machines you have to deploy an new service from template
+
+- Copy and paste the following JSON syntax into your file:
+
+
+    ```json
+    {
+        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+            "WorkspaceName": {
+                "type": "string"
+            },
+            "WorkspaceLocation": {
+                "type": "string"
+            }
+        },
+        "resources": [
+            {
+                "apiVersion": "2017-03-15-preview",
+                "type": "Microsoft.OperationalInsights/workspaces",
+                "name": "[parameters('WorkspaceName')]",
+                "location": "[parameters('WorkspaceLocation')]",
+                "resources": [
+                    {
+                        "apiVersion": "2015-11-01-preview",
+                        "location": "[parameters('WorkspaceLocation')]",
+                        "name": "[concat('VMInsights', '(', parameters('WorkspaceName'),')')]",
+                        "type": "Microsoft.OperationsManagement/solutions",
+                        "dependsOn": [
+                            "[concat('Microsoft.OperationalInsights/workspaces/', parameters('WorkspaceName'))]"
+                        ],
+                        "properties": {
+                            "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces/', parameters('WorkspaceName'))]"
+                        },
+                        "plan": {
+                            "name": "[concat('VMInsights', '(', parameters('WorkspaceName'),')')]",
+                            "publisher": "Microsoft",
+                            "product": "[Concat('OMSGallery/', 'VMInsights')]",
+                            "promotionCode": ""
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    ```
+
+
+
+4. After the integration of **Log Analytics Workspace** with **Azure Monitor** go to **Performance**, and review the performance metrics of your **Azure** servers. For the on
+
+	![Azure portal](Pictures/mon_3.png)
+
+5. Go to **Map** `This is like the service map solution that you deploy on earlier steps`.
+
+	![Azure portal](Pictures/mon_4.png)
+
+6  You can follow the guide (**Here**)[https://docs.microsoft.com/en-us/azure/azure-monitor/learn/tutorial-metrics-explorer] to create your metric chart for your.
+
+	![Azure portal](Pictures/mon_5.png)
+
+7. On the **Create alert rule** wizard click on the **Select resource** and in the `Search to filter items...` enter **Recovery Services Vault**. Select your recovery vault and press **Done**.
+
+	![Azure portal](Pictures/mon_7.png)
 
