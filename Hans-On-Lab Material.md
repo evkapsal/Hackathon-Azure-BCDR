@@ -323,6 +323,51 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
     ```
     sudo sh ./omsagent-*.universal.x64.sh --install -w <workspace id> -s <shared key>
     ```
+### Task 3: Deploy Service Map Solution
+
+1.  From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+
+2. Go to your **Log Analytics Workspace**
+	
+	![Azure portal](Pictures/map_1.png)
+
+3. Go to **Workspace Summary** and click on **+ Add**.
+
+	![Azure portal](Pictures/map_3.png)
+
+4. **Solution Marketplace** will open, on the search box enter **Service Map** and press `Enter`.
+
+	![Azure portal](Pictures/map_4.png)
+
+5. On the **Service Map** solution press **Create**.
+
+	![Azure portal](Pictures/map_5.png)
+
+6. Select your **Log Analytics Workspace** press **Create**.
+
+	![Azure portal](Pictures/map_6.png)
+
+7. Select your **Log Analytics Workspace** press **Create**.
+
+	![Azure portal](Pictures/map_7.png)
+
+8. Install the Dependency agents on your **On Premises** virtual machines.
+
+>[Dependency Agent for Windows](https://aka.ms/dependencyagentwindows)
+
+>[Dependency Agent for Linux](https://aka.ms/dependencyagentlinux)
+
+9. Go to **Assessment-Plan-Logs | Solutions** and select **Service Map**
+
+10. On the Summary click on **View Summary** and then click on the **Solution**.
+
+	![Azure portal](Pictures/map_8.png)
+
+11. Select your server from the left blade and review the **Service Map**. You can revire all of the components of service map following the documentation [**Here**](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-maps)
+
+	![Azure portal](Pictures/map_9.png)
+
+
 
 ### Task 4: Deploy Security Center Solution
 
@@ -355,6 +400,8 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
 9. Go to *Security Center* **Overview** and select **File Integrity Monitoring**. Select your **Log Analytics Workspace** and click **Enable**.
 	
 	![Azure portal](Pictures/sec10.png)
+
+10. Let the solution to collect data and review from the left blade the solution that **Security Center** can offer.  More related tasks for security center [**here**](https://docs.microsoft.com/en-us/azure/security-center/security-center-onboarding).
 
 ### Task 5: Deploy Network Monitor Solution
 
