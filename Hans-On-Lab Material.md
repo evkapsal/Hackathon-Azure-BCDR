@@ -281,10 +281,48 @@ Use the **Log Analytics workspaces** menu to create a Log Analytics workspace us
 
 3. After providing the required information on the **Log Analytics Workspace** pane, click **Review + Create** and then **Create** to proceed.  
 
+4. Go to Log Analytics workspace that you create earlier select **Agents Management**. Copy your ** Workspace ID** and your **Primary Key** into a txt document in your **Device**. We will use this information in order to register the `Log Analytics Agents` into the workspace.
+
+	 ![Azure portal](Pictures\log_3.png)
 
 ### Task 2: Deploy Log Analytics Agents
 
-### Task 3: Deploy Service Map Solution
+In your Log Analytics workspace, from the **Windows Servers** page you navigated to earlier, select the appropriate **Download Windows Agent** version to download depending on the processor architecture of the Windows operating system.
+
+> For Windows Servers
+   
+1. Run Setup to install the agent on your computer.
+
+2. On the **Welcome** page, click **Next**.
+
+3. On the **License Terms** page, read the license and then click **I Agree**.
+
+4. On the **Destination Folder** page, change or keep the default installation folder and then click **Next**.
+
+5. On the **Agent Setup Options** page, choose to connect the agent to Azure Log Analytics and then click **Next**.   
+
+6. On the **Azure Log Analytics** page, perform the following:
+   * Paste the **Workspace ID** and **Workspace Key (Primary Key)** that you copied earlier.  
+   * If the computer needs to communicate through a proxy server to the Log Analytics service, click **Advanced** and provide the URL and port number of the proxy server.  If your proxy server requires authentication, type the username and password to authenticate with the proxy server and then click **Next**.  
+
+7. Click **Next** once you have completed providing the necessary configuration settings.<br><br> ![paste Workspace ID and Primary Key](Pictures/log_5.png)<br><br>
+
+8. On the **Ready to Install** page, review your choices and then click **Install**.
+
+9. On the **Configuration completed successfully** page, click **Finish**.
+
+> For Linux Servers
+
+* [Manually download and install](#https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/azure-monitor/platform/agent-linux.md#install-the-agent-manually) the agent.
+
+1. [Download](https://github.com/microsoft/OMS-Agent-for-Linux#azure-install-guide) and transfer the appropriate bundle (x64 or x86) to your Linux VM or physical computer, using scp/sftp.
+
+2. Install the bundle by using the `--install` argument. To onboard to a Log Analytics workspace during installation, provide the `-w <WorkspaceID>` and `-s <workspaceKey>` parameters copied earlier.
+
+
+    ```
+    sudo sh ./omsagent-*.universal.x64.sh --install -w <workspace id> -s <shared key>
+    ```
 
 ### Task 4: Deploy Security Center Solution
 
