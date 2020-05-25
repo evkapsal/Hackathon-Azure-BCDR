@@ -1,4 +1,4 @@
-# Business continuity and disaster recovery
+# Business Continuity and Hybrid Operations
 
 Organization is willing to build a business continuity plan based on Microsoft Azure Site Recovery Services. Also is trying to identify the services that are running within the organization and provide a dynamic service dependency map.
 
