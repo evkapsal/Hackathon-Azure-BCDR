@@ -40,7 +40,7 @@ In this task, your **On Premises VM** will be configured to replicate to Azure a
     - **Where do you want to replicate your machines to?**: To Azure
     - **Are you performing a migration?**: No
     - **I understand, but I would like to continue with Azure Site Recovery**: checked
-    - **Are your machines virtualized?**: Yes, with Hyper-V  (Your VM is running as a nested VM in Azure).
+    - **Are your machines virtualized?**: Yes, with Hyper-V .
     - **Are you using System Center VMM to manage your Hyper-V hosts?**: No
 
     ![Fields in the Protection goal blade are set to the previously defined values.](Pictures/DR_8.png "Protection goal blade")
