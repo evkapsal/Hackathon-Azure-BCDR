@@ -1,180 +1,116 @@
 ![VMware Logo](Pictures/vmware.png)
 
 ## Exercise 3: Configure VMWare Environments for failover.
+**Contents**
 
-Duration: 30 minutes
+<!-- TOC -->
+
+- [Exercise 3: Configure VMWare Environments for failover](#exercise-3-configure-vmware-environments-for-failover)
+    - [Task 1: Prepare on-premises VMWare environment](#task-1-prepare-on-premises-vmware-environment)
+    - [Task 2: Deploy the Configuration Server](#task-2-deploy-the-configuration-server)
+    - [Task 3: Finalize Azure Environment and Create the First Replication](#task-3-finalize-azure-environment-and-create-the-first-replication)
+    - [Task 4: Simulate Test Failover *Optional*](#task-3-simulate-test-failover)
+
+
+<!-- /TOC -->
+
+Duration: 45 minutes
 
 In this exercise, you will configure the VMWare environments to use BCDR technologies found in Azure. The environment has unique configurations that must be completed to ensure their availability in the event of a disaster.
 
-# Deploy a configuration server
+### Task 1: Prepare on-premises VMWare environment
 
-You deploy an on-premises configuration server when you use [Azure Site Recovery](site-recovery-overview.md) for disaster recovery of VMware VMs and physical servers to Azure. The configuration server coordinates communications between on-premises VMware and Azure. It also manages data replication. This article walks you through the steps needed to deploy the configuration server when you're replicating VMware VMs to Azure. If you need to set up a configuration server for physical server replication, see [Set up the configuration server for disaster recovery of physical servers to Azure](physical-azure-set-up-source.md).
 
-> [!TIP]
-> To learn about the role of a configuration server as part of Azure Site Recovery architecture, see [VMware to Azure disaster recovery architecture](vmware-azure-architecture.md).
+1. Go to **VMWare VCenter** and create a new *Role* with name **Azure\_Site\_Recovery**
 
-## Deploy a configuration server through an OVA template
+2. Give the following permission to the role:
 
-The configuration server must be set up as a highly available VMware VM with certain minimum hardware and sizing requirements. For convenient and easy deployment, Site Recovery provides a downloadable Open Virtualization Application (OVA) template to set up the configuration server that complies with all the mandated requirements listed here.
+**Task** | **Role/Permissions** | **Details**
+--- | --- | ---
+**VM discovery** | At least a read-only user<br/><br/> Data Center object –> Propagate to Child Object, role=Read-only | User assigned at datacenter level, and has access to all the objects in the datacenter.<br/><br/> To restrict access, assign the **No access** role with the **Propagate to child** object, to the child objects (vSphere hosts, datastores, VMs and networks).
+**Full replication, failover, failback** |  Create a role (Azure_Site_Recovery) with the required permissions, and then assign the role to a VMware user or group<br/><br/> Data Center object –> Propagate to Child Object, role=Azure_Site_Recovery<br/><br/> Datastore -> Allocate space, browse datastore, low-level file operations, remove file, update virtual machine files<br/><br/> Network -> Network assign<br/><br/> Resource -> Assign VM to resource pool, migrate powered off VM, migrate powered on VM<br/><br/> Tasks -> Create task, update task<br/><br/> Virtual machine -> Configuration<br/><br/> Virtual machine -> Interact -> answer question, device connection, configure CD media, configure floppy media, power off, power on, VMware tools install<br/><br/> Virtual machine -> Inventory -> Create, register, unregister<br/><br/> Virtual machine -> Provisioning -> Allow virtual machine download, allow virtual machine files upload<br/><br/> Virtual machine -> Snapshots -> Remove snapshots | User assigned at datacenter level, and has access to all the objects in the datacenter.<br/><br/> To restrict access, assign the **No access** role with the **Propagate to child** object, to the child objects (vSphere hosts, datastores, VMs and networks).
+	 
+3. If you didn't download the `Configuration Server` go to **BCDRCLOUDSRV** Recovery Vault and follow the below steps:
 
-## Prerequisites
-
-Minimum hardware requirements for a configuration server are summarized in the following sections.
-
-[!INCLUDE [site-recovery-configuration-server-requirements](../../includes/site-recovery-configuration-and-scaleout-process-server-requirements.md)]
-
-## Azure Active Directory permission requirements
-
-You must have a user with one of the following permissions set in Azure Active Directory (Azure AD) to register the configuration server with Azure Site Recovery services.
-
-1. The user must have an application developer role to create an application.
-    - To verify, sign in to the Azure portal.</br>
-    - Go to **Azure Active Directory** > **Roles and administrators**.</br>
-    - Verify that the application developer role is assigned to the user. If not, use a user with this permission or contact an [administrator to enable the permission](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-users-assign-role-azure-portal#assign-roles).
-    
-2. If the application developer role can't be assigned, ensure that the **Users can register applications** flag is set as **true** for the user to create an identity. To enable these permissions:
-    - Sign in to the Azure portal.
-    - Go to **Azure Active Directory** > **User settings**.
-    - Under **App registrations**, **Users can register applications**, select **Yes**.
-
-      ![Azure AD_application_permission](Pictures/vmware_1.png)
-3.# Add or delete users using Azure Active Directory
-
-Add new users or delete existing users from your Azure Active Directory (Azure AD) organization. To add or delete users you must be a User administrator or Global administrator.
-
-### To create a new tenant
-
-1. Sign in to your organization's [Azure portal](https://portal.azure.com/).
-
-- From the Azure portal menu, select **Create a resource**.  
-
-    ![Azure Active Directory Create resoure page](Pictures/AD_2.png)
-
-- Select **Identity**, and then select **Azure Active Directory**.
-
-    The **Create directory** page appears.
-
-    ![Azure Active Directory Create page](Pictures/AD_3.png)
-
--  On the **Create directory** page, enter the following information:
-    
-    - Type _Organization Name_ into the **Organization name** box. _Example: Contoso_
-
-    - Type _Organization Name_ into the **Initial domain name** box. _Example: Contoso_
-
-    - Select the _Your Country_ option in the **Country or region** box.
-
-1. Select **Create**.
-
-Your new tenant is created with the domain contoso.onmicrosoft.com.
-
-## Add a new user in Azure Active Directory.
-
-You can create a new user using the Azure Active Directory portal.
-
-To add a new user, follow these steps:
-
-- Sign in to the [Azure portal](https://portal.azure.com/) as a User administrator for the organization.
-
-- Search for and select *Azure Active Directory* from any page.
-
-- Select **Users**, and then select **New user**.
-
-    ![Add a user through Users - All users in Azure AD](Pictures/AD_1.png)
-
-- On the **User** page, enter information for this user:
-
-   - **Name**. Required. The first and last name of the new user. For example, *Mary Parker*.
-
-   - **User name**. Required. The user name of the new user. For example, `mary@contoso.com`.
-
-     The domain part of the user name must use either the initial default domain name, *\<yourdomainname>.onmicrosoft.com*, or a custom domain name, such as *contoso.com*. For more information about how to create a custom domain name, see [Add your custom domain name using the Azure Active Directory portal](add-custom-domain.md).
-
-   - **Directory role**: Assign the user to be an **Application developer** role
-
-- Copy the autogenerated password provided in the **Password** box. You'll need this password for the user to sign in for the first time.
-
-- Select **Create**.
-- You can use this user to register VMWare Configuration Server.
-
-The user is created and added to your Azure AD organization.
-
-> [!NOTE]
-> Active Directory Federation Services *isn't supported*. Use an account managed through [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis).
-## Download the template
-
-1. In the vault, go to **Prepare Infrastructure** > **Source**.
-2. In **Prepare source**, select **+Configuration server**.
-3. In **Add Server**, check that **Configuration server for VMware** appears in **Server type**.
-4. Download the OVA template for the configuration server.
+	- Go to **Prepare Infrastructure** > **Source**
+	- In **Prepare source**, select **+Configuration server**
+	- In **Add Server**, check that **Configuration server for VMware** appears in **Server type**
+	- Download the OVA template for the configuration server.
 
    > [!TIP]
    >You can also download the latest version of the configuration server template directly from the [Microsoft Download Center](https://aka.ms/asrconfigurationserver).
 
-> [!NOTE]
-> The license provided with an OVA template is an evaluation license that's valid for 180 days. After this period, you must procure a license.
 
-## Import the template in VMware
+### Task 2: Deploy the Configuration Server
 
 1. Sign in to the VMware vCenter server or vSphere ESXi host by using the VMWare vSphere Client.
+
 2. On the **File** menu, select **Deploy OVF Template** to start the **Deploy OVF Template** wizard.
 
      ![Deploy OVF Template](Pictures/vmware_2.png)
 
 3. On **Select source**, enter the location of the downloaded OVF.
+
 4. On **Review details**, select **Next**.
+
 5. On **Select name and folder** and **Select configuration**, accept the default settings.
+
 6. On **Select storage**, for best performance select **Thick Provision Eager Zeroed** in **Select virtual disk format**. Use of the thin provisioning option might affect the performance of the configuration server.
+
 7. On the rest of the wizard pages, accept the default settings.
+
 8. On **Ready to complete**:
 
     * To set up the VM with the default settings, select **Power on after deployment** > **Finish**.
     * To add an additional network interface, clear **Power on after deployment**, and then select **Finish**. By default, the configuration server template is deployed with a single NIC. You can add additional NICs after deployment.
 
-> [!IMPORTANT]
-> Don't change resource configurations, such as memory, cores, and CPU restriction, or modify or delete installed services or files on the configuration server after deployment. These types of changes affect the registration of the configuration server with Azure services and the performance of the configuration server.
+9. From the VMWare vSphere Client console, turn on the **VM**.
 
+10. The VM boots up into a Windows Server 2016 installation experience. `Accept the license agreement`, and enter an **administrator password**.
 
-## Register the configuration server with Azure Site Recovery services
+11. After the installation finishes, sign in to the VM as the administrator.
 
-1. From the VMWare vSphere Client console, turn on the VM.
-2. The VM boots up into a Windows Server 2016 installation experience. Accept the license agreement, and enter an administrator password.
-3. After the installation finishes, sign in to the VM as the administrator.
-4. The first time you sign in, within a few seconds the Azure Site Recovery Configuration tool starts.
-5. Enter a name that's used to register the configuration server with Site Recovery. Then select **Next**.
-6. The tool checks that the VM can connect to Azure. After the connection is established, select **Sign in** to sign in to your Azure subscription.</br>
+12. The first time you sign in, within a few seconds the **Azure Site Recovery Configuration tool** starts.
+
+13. Enter a name that's used to register the configuration server with Site Recovery. Then select **Next**.
+
+14. The tool checks that the VM can connect to Azure. After the connection is established, select **Sign in** to sign in to your Azure subscription.</br>
     a. The credentials must have access to the vault in which you want to register the configuration server.</br>
     b. Ensure that the chosen user account has permission to create an application in Azure. To enable the required permissions, follow the guidelines in the section [Azure Active Directory permission requirements](#azure-active-directory-permission-requirements).
-7. The tool performs some configuration tasks, and then reboots.
-8. Sign in to the machine again. The configuration server management wizard starts automatically in a few seconds.
 
-### Configure settings
+15. The tool performs some configuration tasks, and then reboots.
 
-1. In the configuration server management wizard, select **Setup connectivity**. From the drop-down boxes, first select the NIC that the in-built process server uses for discovery and push installation of mobility service on source machines. Then select the NIC that the configuration server uses for connectivity with Azure. Select **Save**. You can't change this setting after it's configured. Don't change the IP address of a configuration server. Ensure that the IP assigned to the configuration server is a static IP and not a DHCP IP.
-2. On **Select Recovery Services vault**, sign in to Microsoft Azure with the credentials used in step 6 of [Register the configuration server with Azure Site Recovery services](#register-the-configuration-server-with-azure-site-recovery-services).
-3. After sign-in, select your Azure subscription and the relevant resource group and vault.
+16. Sign in to the machine again. The configuration server management wizard starts automatically in a few seconds.
 
-    > [!NOTE]
-    > After registration, there's no flexibility to change the recovery services vault.
-    > Changing a recovery services vault requires disassociation of the configuration server from the current vault, and the replication of all protected virtual machines under the configuration server is stopped. To learn more, see [Manage the configuration server for VMware VM disaster recovery](vmware-azure-manage-configuration-server.md#register-a-configuration-server-with-a-different-vault).
+17. In the configuration server management wizard, select **Setup connectivity**. From the drop-down boxes, first select the NIC that the in-built process server uses for discovery and push installation of mobility service on source machines. Then select the NIC that the configuration server uses for connectivity with Azure. Select **Save**. You can't change this setting after it's configured. Don't change the IP address of a configuration server. Ensure that the IP assigned to the configuration server is a static IP and not a DHCP IP.
 
-4. On **Install third-party software**:
+18. On **Select Recovery Services vault**, sign in to Microsoft Azure with the credentials used in step 6 of [Register the configuration server with Azure Site Recovery services](#register-the-configuration-server-with-azure-site-recovery-services).
+
+19. After sign-in, select your Azure subscription and the relevant resource group and vault.
+
+20. On **Install third-party software**:
 
     |Scenario   |Steps to follow  |
     |---------|---------|
     |I want to download and install MySQL through Azure Site Recovery.    |  Accept the license agreement, and select **Download and install**. After installation finishes, proceed to the next step.       |
 
-5. On **Validate appliance configuration**, prerequisites are verified before you continue.
-6. On **Configure vCenter Server/vSphere ESXi server**, enter the FQDN or IP address of the vCenter server, or vSphere host, where the VMs you want to replicate are located. Enter the port on which the server is listening. Enter a friendly name to be used for the VMware server in the vault.
-7. Enter credentials to be used by the configuration server to connect to the VMware server. Site Recovery uses these credentials to automatically discover VMware VMs that are available for replication. Select **Add** > **Continue**. The credentials entered here are locally saved.
-8. On **Configure virtual machine credentials**, enter the user name and password of virtual machines to automatically install mobility service during replication. For **Windows** machines, the account needs local administrator privileges on the machines you want to replicate. For **Linux**, provide details for the root account.
-9. Select **Finalize configuration** to complete registration.
-10. After registration finishes, open the Azure portal and verify that the configuration server and VMware server are listed on **Recovery Services Vault** > **Manage** > **Site Recovery Infrastructure** > **Configuration Servers**.
+21. On **Validate appliance configuration**, prerequisites are verified before you continue.
 
-## Upgrade the configuration server
+22. On **Configure vCenter Server/vSphere ESXi server**, enter the FQDN or IP address of the vCenter server, or vSphere host, where the VMs you want to replicate are located. Enter the port on which the server is listening. Enter a friendly name to be used for the VMware server in the vault.
 
-To upgrade the configuration server to the latest version, see [Manage the configuration server for VMware VM disaster recovery](vmware-azure-manage-configuration-server.md#upgrade-the-configuration-server). For instructions on how to upgrade all Site Recovery components, see [Service updates in Site Recovery](service-updates-how-to.md).
+23. Enter credentials to be used by the configuration server to connect to the VMware server. Site Recovery uses these credentials to automatically discover VMware VMs that are available for replication. Select **Add** > **Continue**. The credentials entered here are locally saved.
 
-## Manage the configuration server
+24. On **Configure virtual machine credentials**, enter the user name and password of virtual machines to automatically install mobility service during replication. For **Windows** machines, the account needs local administrator privileges on the machines you want to replicate. For **Linux**, provide details for the root account.
 
-To avoid interruptions in ongoing replication, ensure that the IP address of the configuration server doesn't change after the configuration server is registered to a vault. To learn more about common configuration server management tasks, see [Manage the configuration server for VMware VM disaster recovery](vmware-azure-manage-configuration-server.md).
+25. Select **Finalize configuration** to complete registration.
+
+26. After registration finishes, open the Azure portal and verify that the configuration server and VMware server are listed on **Recovery Services Vault** > **Manage** > **Site Recovery Infrastructure** > **Configuration Servers**.
+
+### Task 3: Finalize Azure Environment and Create the First Replication
+### Task 4: Simulate Test Failover *Optional*
+
+
+### Configure settings
+
+
+

@@ -1,4 +1,5 @@
 ![Hyper-V Logo.](Pictures/hyper.jpeg "Hyper-V Logo")
+## Exercise 3: Configure Hyper-V Environments for failover
 
 **Contents**
 
@@ -13,7 +14,7 @@
 
 <!-- /TOC -->
 
-## Exercise 3: Configure Hyper-V Environments for failover
+
 
 Duration: 45 minutes
 

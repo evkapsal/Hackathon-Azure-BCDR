@@ -12,6 +12,7 @@ Hands-on lab step-by-step
 May 2020
 </div>
 
+# Business continuity and disaster recovery hands-on lab step-by-step 
 
 **Contents**
 
@@ -43,7 +44,7 @@ May 2020
 <!-- /TOC -->
 
 
-# Business continuity and disaster recovery hands-on lab step-by-step 
+
 
 ## Abstract
 
