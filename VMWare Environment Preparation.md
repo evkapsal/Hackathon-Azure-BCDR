@@ -28,7 +28,7 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
 
 3. Next, select **Prepare Infrastructure** in the **For On-Premises Machines** section. This will start you down a path of various steps to configure your VM that is running on VMWare on-premises to be replicated to Azure.
 
-	![In the For On-Premises Machines section, Prepare Infrastructure is selected.](Pictures/VMWARE_20.PNG "For On-Premises Machines section")
+	![In the For On-Premises Machines section, Prepare Infrastructure is selected.](Pictures/VMWare_20.PNG "For On-Premises Machines section")
 
 
 4. On **Step 1 Protection Goal** select the following inputs and then select **OK**:
@@ -40,18 +40,18 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
     - **Are your machines virtualized?**: `Yes, with VMware vSphere Hypervisor`
 	Press **OK**
 
-	![In the For On-Premises Machines section, Prepare Infrastructure is selected.](Pictures/VMWARE_21.PNG "For On-Premises Machines section")
+	![In the For On-Premises Machines section, Prepare Infrastructure is selected.](Pictures/VMWare_21.PNG "For On-Premises Machines section")
 
 5. In **Deployment planning** `Have you completed deployment planning?`, select **Yes, I have Done it** and click **OK**
 
-    ![Fields in the Protection goal blade are set to the previously defined values.](Pictures/VMWARE_22.PNG "Protection goal blade")
+    ![Fields in the Protection goal blade are set to the previously defined values.](Pictures/VMWare_22.PNG "Protection goal blade")
 
 6. In **Prepare Source** click **+ Configuration Server**
 
-	![Fields in the Protection goal blade are set to the previously defined values.](Pictures/VMWARE_23.PNG "Protection goal blade")
+	![Fields in the Protection goal blade are set to the previously defined values.](Pictures/VMWare_23.PNG "Protection goal blade")
 7. From here you can download the configuration server.
 
-	![Fields in the Protection goal blade are set to the previously defined values.](Pictures/VMWARE_24.PNG "Protection goal blade")
+	![Fields in the Protection goal blade are set to the previously defined values.](Pictures/VMWare_24.PNG "Protection goal blade")
 
 ### Task 2: Deploy the Configuration Server
 
