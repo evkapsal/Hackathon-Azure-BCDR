@@ -160,8 +160,6 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
 
     ![In the Choose storage account blade, Create new is selected. In the Create storage account blade, fields are set to the previously defined settings.](Pictures/hyper_35.png "Choose storage account and Create storage account blades")
 
-    > **Note:** Be sure to select **Premium** Performance or you may run into issues later in the lab.
-
 5. Select **+Storage account** again and create a second storage account using the **Standard** performance tier, then select **OK**.
 
 6. The portal will submit a deployment, and you must wait until this completes. It will be created in the **BCDRRG** resource group.
@@ -183,6 +181,8 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
 ### Task 4: Enable Virtual Machine Protection Replication
 
 1. Select **Replicate application** > **Source**.
+
+	![In the Recovery Services vault blade, Step 1: Replicate Application is selected.](Pictures/hyper_43.png "Recovery Services vault blade")
  
 2. In **Source**, select **On-premises**, and select the configuration server in **Source location**.
  
@@ -191,20 +191,30 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
 4. In **vCenter/vSphere Hypervisor**, select the vSphere host, or vCenter server that manages the host.
 
 5. Select the process server (installed by default on the configuration server VM). Then select **OK**. Health status of each process server is indicated as per recommended limits and other parameters. Choose a healthy process server.
+	
+	![Configure Source.](Pictures/vmware_9.png "Configure Source")
 
 6. In **Target**, select the subscription and the resource group in which you want to create the failed-over VMs. We're using the Resource Manager deployment model.
 
-7. Select the Azure network and subnet to which Azure VMs connect when they're created after failover.
+7. Select the Azure network and subnet **Cloud\_VNet\_Production** to which Azure VMs connect when they're created after failover.
+
+	![Configure Target.](Pictures/vmware_10.png "Configure Target")
 
 8. Select **Configure now for selected machines** to apply the network setting to all VMs on which you enable replication. Select **Configure later** to select the Azure network per machine.
 
-9. In **Virtual Machines** > **Select virtual machines**, select each machine you want to replicate. You can only select machines for which replication can be enabled. Then select **OK**. If you are not able to view/select any particular virtual machine, [learn more](https://aka.ms/doc-plugin-VM-not-showing) about resolving the issue.
+	![Select Replication.](Pictures/vmware_11.png "Select Replication")
+
+9. In **Virtual Machines** > **Select virtual machines**, select each machine you want to replicate. You can only select machines for which replication can be enabled. Then select **OK**.
 
 10. In **Properties** > **Configure properties**, select the account to be used by the process server to automatically install Mobility Service on the machine.
+
+	![Configure Properties.](Pictures/vmware_12.png "Configure Properties")
 
 11. In **Replication settings** > **Configure replication settings**, verify that the correct replication policy is selected.
 
 12. Select **Enable Replication**. Site Recovery installs the Mobility Service when replication is enabled for a VM.
+
+	![Select Replication.](Pictures/vmware_13.png "Select Replication")
 
 13. You can track progress of the **Enable Protection** job in **Settings** > **Jobs** > **Site Recovery Jobs**. After the **Finalize Protection** job runs and a recovery point generation is complete, the machine is ready for failover.
 
@@ -214,8 +224,47 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
 
 ### Task 5: Simulate Test Failover *Optional*
 
+On this task you will simulate the and use the **Test Failover Functionality** of Site Recovery vault.
+
+1. From the Azure portal, open the **BCDRCLOUDSRV** Recovery Services Vault located in the **BCDRRG** resource group.
+
+ 
+2. Open the **BCDRCLOUDSRV** and select **Replicated Items** under the **Protected Items** area. Make sure that **OnPremVM** shows up ad **Replication Heath**: **Healthy.** Select **OnPremVM**.
+
+    ![Under Protected Items, Replicated items is selected.](Pictures/hyper_60.png "Protected Items section")
+
+    ![The OnPremVM status is Healthy.](Pictures/hyper_61.png "OnPremVM status")
+
+3. Right-click **OnPremVM** and then select **Test Failover**.
+
+    ![The OnPremVM Healthy status right-click menu has Failover selected.](Pictures/hyper_62.png "Failover option")
+
+4. Select you your latest **recovery point**  verify that **From** is set to **MyOnPremSite** and **To** is set to **Microsoft Azure**, for **Azure virtual network** choose **Cloud\_DR\_Network** and press **OK**.
+
+    ![Call outs in the Failover blade point to both the From and To fields.](Pictures/hyper_63.png "Failover blade")
+
+5. The Azure portal will provide a notification that the Test failover is starting.
+
+    ![The Starting Failover notification explains that the operation is in progress.](Pictures/hyper_64.png "Starting Failover notification")
+
+6. By selecting Site Recovery Jobs, you can monitor the progress of the failover.
+
+    ![In the Properties section, the status of the various jobs display.](Pictures/hyper_65.png "Properties section")
+
+7. Once the Failover Status is *Successful* in Site Recovery Jobs, go to **Virtual Machines** and you will see your **OnPremVM** with status **Running**.
+
+    ![The OnPremVM Healthy status running.](Pictures/hyper_66.png "Complete Test Faiolver option")
+
+8. In order to access the Virtual Machine **OnPremVM** you need to deploy a Virtual Machine in this network because it is isolated.
+
+9. When you finish your health check go again back to **BCDRCLOUDSRV** Site Recovery vault in the _Replicated items_. You will see your **OnPremVM** with status **Cleanup test ...**. 
 
 
+10. Go to the left side on **...** and when the new blade appears select **Cleanup test failover**.
+
+    ![In the Resource group blade OnPremVM is selected.](Pictures/hyper_67.png "Resource group blade")
+
+11. Enter your Notes for the testing, Check **Testing is Complete** and press **OK**. This will delete your Test Failover Virtual Machine.
 
 
 
