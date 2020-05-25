@@ -40,7 +40,7 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
     - **Are your machines virtualized?**: `Yes, with VMware vSphere Hypervisor`
 	Press **OK**
 
- 	![In the For On-Premises Machines section, Prepare Infrastructure is selected.](Pictures/vmware_21.png "For On-Premises Machines section")
+	![In the For On-Premises Machines section, Prepare Infrastructure is selected.](Pictures/VMWARE_21.PNG "For On-Premises Machines section")
 
 5. In **Deployment planning** `Have you completed deployment planning?`, select **Yes, I have Done it** and click **OK**
 
