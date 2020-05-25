@@ -215,6 +215,8 @@ In this exercise, you will follow the Step By Step Guide to deploy the Azure Ser
 
 > **Note: ** This step can take up to 45 minutes to complete, but you can continue to the next exercise.
 
+>  **Note: **We will not create the IPSec Tunnel in this Lab. In order to proceed and create the VPN IPSec tunnel with your on premises router please follow the guide [Here](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal#LocalNetworkGateway) 
+
 
 ## Exercise 2: Configure BCDR services
 
