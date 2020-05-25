@@ -259,7 +259,6 @@ In this exercise, you will create and configure the services that will make it p
 
 ### Task 1: Create Log Analytics Workspace
 
-
 Use the **Log Analytics workspaces** menu to create a Log Analytics workspace using the Azure portal. A Log Analytics workspace is a unique environment for Azure Monitor log data. Each workspace has its own data repository and configuration, and data sources and solutions are configured to store their data in a particular workspace. You require a Log Analytics workspace if you intend on collecting data from the following sources:
 
 
@@ -327,6 +326,43 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
 
 ### Task 4: Deploy Security Center Solution
 
+1.  From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+
+2. On the Microsoft Azure menu, select Security Center. Security Center - Overview opens.
+
+	![Azure portal](Pictures/sec4.png)
+
+3. Under the Security Center main menu, select **Getting started**
+
+4. Select your **Log Analytics Workspace** you created earlier and click **Upgrade**. This is a monthly trial and allows you to have [**Windows Server Defender ATP**](https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/configure-server-endpoints) automated **Vulnerability Assessments** with [**Qualys**](https://docs.microsoft.com/en-us/azure/security-center/built-in-vulnerability-assessment). 
+
+5. Go to **Secure Score** and click **Review your Security Score**
+
+	![Azure portal](Pictures/sec6.png)
+
+6. Next to you Subscription click on **View recommendations**
+
+	![Azure portal](Pictures/sec7.png)
+
+7. Review your `Security recommendation`.
+	
+	![Azure portal](Pictures/sec8.png)
+
+8. Go to *Security Center* **Overview** and select **Compute & apps**. Review the `Overview` and `VMs and Servers`.
+	
+	![Azure portal](Pictures/sec9.png)
+
+9. Go to *Security Center* **Overview** and select **File Integrity Monitoring**. Select your **Log Analytics Workspace** and click **Enable**.
+	
+	![Azure portal](Pictures/sec10.png)
+
 ### Task 5: Deploy Network Monitor Solution
 
+1.  From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+
+
+
 ### Task 6: Enable Azure Monitor
+
+1.  From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
+
