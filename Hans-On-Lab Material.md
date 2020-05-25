@@ -347,19 +347,15 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
 
 	![Azure portal](Pictures/map_6.png)
 
-7. Select your **Log Analytics Workspace** press **Create**.
-
-	![Azure portal](Pictures/map_7.png)
-
-8. Install the Dependency agents on your **On Premises** virtual machines.
+7. Install the Dependency agents on your **On Premises** virtual machines.
 
 >[Dependency Agent for Windows](https://aka.ms/dependencyagentwindows)
 
 >[Dependency Agent for Linux](https://aka.ms/dependencyagentlinux)
 
-9. Go to **Assessment-Plan-Logs | Solutions** and select **Service Map**
+8. Go to **Assessment-Plan-Logs | Solutions** and select **Service Map**
 
-10. On the Summary click on **View Summary** and then click on the **Solution**.
+9. On the Summary click on **View Summary** and then click on the **Solution**.
 
 	![Azure portal](Pictures/map_8.png)
 
@@ -407,7 +403,45 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
 
 1.  From **Your Device**, open your favorite browser (**Edge**) and connect to the Azure portal at: <https://portal.azure.com>.
 
+2. Go to your **Log Analytics Workspace**
+	
+	![Azure portal](Pictures/map_1.png)
 
+3. Go to **Workspace Summary** and click on **+ Add**.
+
+	![Azure portal](Pictures/map_3.png)
+
+4. **Solution Marketplace** will open, on the search box enter **Wire Data 2.0** and press `Enter`.
+
+	![Azure portal](Pictures/wr_1.png)
+
+5. On the **Wire Data 2.0** solution press **Create**.
+
+	![Azure portal](Pictures/wr_2.png)
+
+6. Select your **Log Analytics Workspace** press **Create**.
+
+	![Azure portal](Pictures/wr_3.png)
+
+7. Go to **Assessment-Plan-Logs | Solutions** and select **WireData2**
+	
+	![Azure portal](Pictures/map_7.png)
+
+	- Assume that you have already installed the dependency agents from the previous steps.
+
+	>[Dependency Agent for Windows](https://aka.ms/dependencyagentwindows)
+
+	>[Dependency Agent for Linux](https://aka.ms/dependencyagentlinux)
+
+8. On the Summary click on **View Summary** and then click on the the **Solution**.
+
+	![Azure portal](Pictures/wr_4.png)
+
+9. Review yous **Network Subnets** and **Application** level network insights.
+
+	![Azure portal](Pictures/wr_5.png)
+
+10. In order to go deeper into the solution please follow the guide [Here](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/wire-data#using-the-wire-data-20-solution)
 
 ### Task 6: Enable Azure Monitor
 
