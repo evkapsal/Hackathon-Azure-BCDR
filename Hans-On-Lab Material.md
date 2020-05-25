@@ -305,7 +305,8 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
    * Paste the **Workspace ID** and **Workspace Key (Primary Key)** that you copied earlier.  
    * If the computer needs to communicate through a proxy server to the Log Analytics service, click **Advanced** and provide the URL and port number of the proxy server.  If your proxy server requires authentication, type the username and password to authenticate with the proxy server and then click **Next**.  
 
-7. Click **Next** once you have completed providing the necessary configuration settings.<br><br> !	[paste Workspace ID and Primary Key](Pictures/log_5.png)<br><br>
+7. Click **Next** once you have completed providing the necessary configuration settings.<br><br> 
+	![paste Workspace ID and Primary Key](Pictures/log_5.png)<br><br>
 
 8. On the **Ready to Install** page, review your choices and then click **Install**.
 
