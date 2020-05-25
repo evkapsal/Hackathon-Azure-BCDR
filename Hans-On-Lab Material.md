@@ -461,7 +461,7 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
 
 4. In order to integrate **Azure Monitor** with your **Log Analytics** virtual Machines you have to deploy an new service from template
 
-- Copy and paste the following JSON syntax into your file:
+- Copy the following JSON syntax into your file:
 
 
     ```json
@@ -507,21 +507,34 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
     }
     ```
 
+5. Open **Azure Portal** and click on to ** + Create a Resource**.
+ 
+6. On the `Search the Marketplace` enter **Template** and select **Template Deployment**
 
+	![Azure portal](Pictures/mon_23.png)
 
-4. After the integration of **Log Analytics Workspace** with **Azure Monitor** go to **Performance**, and review the performance metrics of your **Azure** servers. For the on
+7. On the results select **Template Deployment**
+	 
+	![Azure portal](Pictures/mon_24.png)
 
-	![Azure portal](Pictures/mon_3.png)
+8. Click on **Create**
+	 
+	![Azure portal](Pictures/mon_25.png)
 
-5. Go to **Map** `This is like the service map solution that you deploy on earlier steps`.
+9. On the Custom deployment wizard click on **Build your own template in the editor**
+	 
+	![Azure portal](Pictures/mon_26.png)
+
+10. On the **Custom deployment** wizard select your **Subscription**, your Resource Group **BCDRRG**, Region **West Europe**, your Log Analytics Workspace **Name**, in the Location enter **West Europe** and press **Review + create** and **Create**
+
+	![Azure portal](Pictures/mon_21.png)
+
+11. After the deployment of **Template** for **Azure Monitor** go to **Performance**, select the **Hybrid** switch and review the performance metrics of your **Hybrid On premises** servers. 
+
+	![Azure portal](Pictures/mon_28.png)
+
+12. Go to **Map** and select **Computer** `This is like the service map solution that you deploy on earlier steps`.
 
 	![Azure portal](Pictures/mon_4.png)
 
-6  You can follow the guide (**Here**)[https://docs.microsoft.com/en-us/azure/azure-monitor/learn/tutorial-metrics-explorer] to create your metric chart for your.
-
-	![Azure portal](Pictures/mon_5.png)
-
-7. On the **Create alert rule** wizard click on the **Select resource** and in the `Search to filter items...` enter **Recovery Services Vault**. Select your recovery vault and press **Done**.
-
-	![Azure portal](Pictures/mon_7.png)
-
+13. You can follow the guide [**Here**](https://docs.microsoft.com/en-us/azure/azure-monitor/learn/tutorial-metrics-explorer) to create your metric chart for your servers.
