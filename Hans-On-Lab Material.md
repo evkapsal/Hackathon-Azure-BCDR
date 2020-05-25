@@ -267,7 +267,7 @@ Use the **Log Analytics workspaces** menu to create a Log Analytics workspace us
 
 2. In the Azure portal, click **All services**. In the list of resources, type **Log Analytics**. As you begin typing, the list filters based on your input. Select **Log Analytics workspaces**.
 
-    ![Azure portal](Pictures\log_1.png)
+    ![Azure portal](Pictures/log_1.png)
   
 2. Click **Add**, and then select choices for the following items:
 
@@ -277,13 +277,13 @@ Use the **Log Analytics workspaces** menu to create a Log Analytics workspace us
    * **Resource Group**: Select **BCDRRG**.
    * **Location**: Select **West Europe**.
 
-        ![Azure portal](Pictures\log_2.png)
+        ![Azure portal](Pictures/log_2.png)
 
 3. After providing the required information on the **Log Analytics Workspace** pane, click **Review + Create** and then **Create** to proceed.  
 
 4. Go to Log Analytics workspace that you create earlier select **Agents Management**. Copy your ** Workspace ID** and your **Primary Key** into a txt document in your **Device**. We will use this information in order to register the `Log Analytics Agents` into the workspace.
 
-	 ![Azure portal](Pictures\log_3.png)
+	 ![Azure portal](Pictures/log_3.png)
 
 ### Task 2: Deploy Log Analytics Agents
 
@@ -305,7 +305,7 @@ In your Log Analytics workspace, from the **Windows Servers** page you navigated
    * Paste the **Workspace ID** and **Workspace Key (Primary Key)** that you copied earlier.  
    * If the computer needs to communicate through a proxy server to the Log Analytics service, click **Advanced** and provide the URL and port number of the proxy server.  If your proxy server requires authentication, type the username and password to authenticate with the proxy server and then click **Next**.  
 
-7. Click **Next** once you have completed providing the necessary configuration settings.<br><br> ![paste Workspace ID and Primary Key](Pictures/log_5.png)<br><br>
+7. Click **Next** once you have completed providing the necessary configuration settings.<br><br> !	[paste Workspace ID and Primary Key](Pictures/log_5.png)<br><br>
 
 8. On the **Ready to Install** page, review your choices and then click **Install**.
 
