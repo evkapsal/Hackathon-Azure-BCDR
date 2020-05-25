@@ -9,7 +9,8 @@
     - [Task 1: Prepare VMWare environment](#task-1-prepare-vmware-environment)
     - [Task 2: Deploy the Configuration Server](#task-2-deploy-the-configuration-server)
     - [Task 3: Finalize Azure Environment and Create the First Replication](#task-3-finalize-azure-environment-and-create-the-first-replication)
-    - [Task 4: Simulate Test Failover *Optional*](#task-3-simulate-test-failover)
+    - [Task 4: Enable Virtual Machine Protection Replication](#task-4-enable-virtual-machine-protection-replication)
+    - [Task 5: Simulate Test Failover *Optional*](#task-5-simulate-test-failover)
 
 
 <!-- /TOC -->
@@ -179,10 +180,42 @@ In this exercise, you will configure the VMWare environments to use BCDR technol
 
 	![The OK button is selected in the Replication policy blade following messages indicating the replication policy has been successfully created and associated with OnPremHyperVSite.](Pictures/hyper_41.png "Replication policy blade")
 
-### Task 4: Simulate Test Failover *Optional*
+### Task 4: Enable Virtual Machine Protection Replication
+
+1. Select **Replicate application** > **Source**.
+ 
+2. In **Source**, select **On-premises**, and select the configuration server in **Source location**.
+ 
+3. In **Machine type**, select **Virtual Machines**.
+ 
+4. In **vCenter/vSphere Hypervisor**, select the vSphere host, or vCenter server that manages the host.
+
+5. Select the process server (installed by default on the configuration server VM). Then select **OK**. Health status of each process server is indicated as per recommended limits and other parameters. Choose a healthy process server.
+
+6. In **Target**, select the subscription and the resource group in which you want to create the failed-over VMs. We're using the Resource Manager deployment model.
+
+7. Select the Azure network and subnet to which Azure VMs connect when they're created after failover.
+
+8. Select **Configure now for selected machines** to apply the network setting to all VMs on which you enable replication. Select **Configure later** to select the Azure network per machine.
+
+9. In **Virtual Machines** > **Select virtual machines**, select each machine you want to replicate. You can only select machines for which replication can be enabled. Then select **OK**. If you are not able to view/select any particular virtual machine, [learn more](https://aka.ms/doc-plugin-VM-not-showing) about resolving the issue.
+
+10. In **Properties** > **Configure properties**, select the account to be used by the process server to automatically install Mobility Service on the machine.
+
+11. In **Replication settings** > **Configure replication settings**, verify that the correct replication policy is selected.
+
+12. Select **Enable Replication**. Site Recovery installs the Mobility Service when replication is enabled for a VM.
+
+13. You can track progress of the **Enable Protection** job in **Settings** > **Jobs** > **Site Recovery Jobs**. After the **Finalize Protection** job runs and a recovery point generation is complete, the machine is ready for failover.
+
+14. It can take 15 minutes or longer for changes to take effect and appear in the portal.
+
+15. To monitor VMs you add, check the last discovered time for VMs in **Configuration Servers** > **Last Contact At**. To add VMs without waiting for the scheduled discovery, highlight the configuration server (don't select it) and select **Refresh**.
+
+### Task 5: Simulate Test Failover *Optional*
 
 
-### Configure settings
+
 
 
 
